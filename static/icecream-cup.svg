@@ -1,0 +1,18 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cute ice cream cup">
+  <defs>
+    <linearGradient id="cupBody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9ee8f0"/>
+      <stop offset="100%" stop-color="#74d0dc"/>
+    </linearGradient>
+  </defs>
+  <circle cx="43" cy="34" r="20" fill="#fff4a8"/>
+  <circle cx="60" cy="28" r="22" fill="#ffd5a7"/>
+  <circle cx="79" cy="36" r="19" fill="#ffe7b8"/>
+  <path d="M28 50 H92 L84 94 H36 Z" fill="url(#cupBody)"/>
+  <path d="M27 50 H93" stroke="#56aeba" stroke-width="4"/>
+  <path d="M41 67 Q60 78 79 67" stroke="#4aa0ab" stroke-width="3" fill="none"/>
+  <circle cx="56" cy="32" r="3" fill="#2a2a2a"/>
+  <circle cx="68" cy="32" r="3" fill="#2a2a2a"/>
+  <path d="M56 42 Q62 46 68 42" stroke="#2a2a2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <rect x="85" y="11" width="4" height="35" rx="2" fill="#ff7297" transform="rotate(24 85 11)"/>
+</svg>

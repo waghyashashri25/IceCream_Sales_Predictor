@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ice Cream Sales Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="sprinkle-field" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span
+      ><span></span> <span></span><span></span><span></span><span></span
+      ><span></span><span></span>
+    </div>
+    <main class="page">
+      <section class="card">
+        <div class="hero-art" aria-hidden="true">
+          <img
+            src="/static/icecream-cone.svg"
+            alt=""
+            class="hero-art-item cone"
+          />
+          <img
+            src="/static/icecream-cup.svg"
+            alt=""
+            class="hero-art-item cup"
+          />
+        </div>
+
+        <header class="header">
+          <p class="eyebrow">Forecast Tool</p>
+          <h1>Ice Cream Sales Predictor</h1>
+          <p class="subtitle">
+            Enter weather details and get a fun, smart ice cream sales forecast.
+          </p>
+          <div class="status-row">
+            <span class="chip-label">Sales mood</span>
+            <span id="sales-mood" class="mood-pill"
+              >Waiting for prediction</span
+            >
+          </div>
+        </header>
+
+        <form
+          id="predict-form"
+          class="form-grid reveal-item"
+          style="--delay: 0.05s"
+        >
+          <label>
+            Day of Week
+            <select name="day_of_week" required>
+              <option>Monday</option>
+              <option>Tuesday</option>
+              <option>Wednesday</option>
+              <option>Thursday</option>
+              <option>Friday</option>
+              <option>Saturday</option>
+              <option>Sunday</option>
+            </select>
+          </label>
+
+          <label>
+            Month
+            <select name="month" required>
+              <option>January</option>
+              <option>February</option>
+              <option>March</option>
+              <option>April</option>
+              <option>May</option>
+              <option>June</option>
+              <option>July</option>
+              <option>August</option>
+              <option>September</option>
+              <option>October</option>
+              <option>November</option>
+              <option>December</option>
+            </select>
+          </label>
+
+          <label>
+            Temperature (F)
+            <input
+              type="number"
+              name="temperature"
+              step="0.1"
+              placeholder="e.g. 81.5"
+              required
+            />
+          </label>
+
+          <label>
+            Rainfall (inches)
+            <input
+              type="number"
+              name="rainfall"
+              step="0.01"
+              placeholder="e.g. 0.25"
+              required
+            />
+          </label>
+
+          <div class="actions">
+            <button type="submit" id="predict-btn">Predict Sales</button>
+            <button type="button" id="reset-btn" class="ghost-btn">
+              Reset
+            </button>
+          </div>
+        </form>
+
+        <section
+          class="quick-fill reveal-item"
+          style="--delay: 0.12s"
+          aria-label="Quick examples"
+        >
+          <p class="quick-title">Quick examples</p>
+          <div class="quick-buttons">
+            <button type="button" class="quick-btn" data-preset="sunny">
+              Hot Sunny Day
+            </button>
+            <button type="button" class="quick-btn" data-preset="rainy">
+              Rainy Slow Day
+            </button>
+            <button type="button" class="quick-btn" data-preset="weekend">
+              Weekend Peak
+            </button>
+          </div>
+        </section>
+
+        <section class="insights reveal-item" style="--delay: 0.18s">
+          <article class="insight-card">
+            <p class="insight-title">Model confidence</p>
+            <div class="meter" aria-label="Model confidence meter">
+              <span id="confidence-fill" class="meter-fill"></span>
+            </div>
+            <strong id="confidence-text">Loading...</strong>
+          </article>
+          <article class="insight-card">
+            <p class="insight-title">Smart tip</p>
+            <strong id="smart-tip"
+              >Try a quick example to compare different days.</strong
+            >
+          </article>
+        </section>
+
+        <p
+          id="error"
+          class="error hidden reveal-item"
+          style="--delay: 0.22s"
+        ></p>
+        <p id="result" class="result hidden reveal-item" style="--delay: 0.24s">
+          Predicted cups sold: <strong id="prediction-value"></strong>
+        </p>
+
+        <div class="metrics reveal-item" style="--delay: 0.3s">
+          <div>
+            <span>RMSE %</span>
+            <strong id="rmse">-</strong>
+          </div>
+          <div>
+            <span>MAE %</span>
+            <strong id="mae">-</strong>
+          </div>
+          <div>
+            <span>R2 %</span>
+            <strong id="r2">-</strong>
+          </div>
+        </div>
+
+        <section class="history reveal-item" style="--delay: 0.32s">
+          <div class="history-head">
+            <p>Recent predictions</p>
+            <button type="button" id="clear-history" class="mini-btn">
+              Clear
+            </button>
+          </div>
+          <ul id="history-list" class="history-list">
+            <li class="history-empty">
+              No predictions yet. Use quick examples to get started.
+            </li>
+          </ul>
+        </section>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
