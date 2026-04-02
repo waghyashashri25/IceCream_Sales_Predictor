@@ -1,7 +1,6 @@
 import argparse
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LinearRegression
@@ -9,7 +8,6 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
-from sklearn.compose import TransformedTargetRegressor
 
 TARGET_COLUMN = "IceCreamsSold"
 EXCLUDED_COLUMNS = {"Date", TARGET_COLUMN}
@@ -38,18 +36,11 @@ def train_and_evaluate(df: pd.DataFrame, test_size: float = 0.3, random_state: i
         ]
     )
 
-    base_model = Pipeline(
+    model = Pipeline(
         steps=[
             ("preprocessor", preprocessor),
             ("regressor", LinearRegression()),
         ]
-    )
-
-    # Train in log-space and invert with exp to keep predictions non-negative.
-    model = TransformedTargetRegressor(
-        regressor=base_model,
-        func=np.log1p,
-        inverse_func=np.expm1,
     )
 
     X_train, X_test, y_train, y_test = train_test_split(

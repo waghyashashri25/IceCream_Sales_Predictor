@@ -11,6 +11,10 @@ CSV_PATH = Path("ice-cream.csv")
 df = load_dataset(CSV_PATH)
 model, metrics = train_and_evaluate(df, test_size=0.3, random_state=42)
 target_mean = float(df["IceCreamsSold"].mean())
+TEMP_MIN = float(df["Temperature"].min())
+TEMP_MAX = float(df["Temperature"].max())
+RAIN_MIN = float(df["Rainfall"].min())
+RAIN_MAX = float(df["Rainfall"].max())
 
 DAY_OPTIONS = [
     "Monday",
@@ -84,6 +88,26 @@ def predict():
             jsonify(
                 {
                     "error": "Please enter valid numeric values for temperature and rainfall."
+                }
+            ),
+            400,
+        )
+
+    if not (TEMP_MIN <= temperature <= TEMP_MAX):
+        return (
+            jsonify(
+                {
+                    "error": f"Temperature must be between {TEMP_MIN:.1f} and {TEMP_MAX:.1f} F for reliable predictions."
+                }
+            ),
+            400,
+        )
+
+    if not (RAIN_MIN <= rainfall <= RAIN_MAX):
+        return (
+            jsonify(
+                {
+                    "error": f"Rainfall must be between {RAIN_MIN:.2f} and {RAIN_MAX:.2f} inches for reliable predictions."
                 }
             ),
             400,
